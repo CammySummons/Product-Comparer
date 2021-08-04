@@ -6,6 +6,9 @@ Version 1
 
 another_product = ""
 convert_to_grams = False
+convert_to_litres = False
+convert_to_kg = False
+convert_to_ml = False
 
 
 # Number checking function
@@ -23,26 +26,25 @@ def num_check(question, error):
 
 
 # Abbreviation lists
-# teaspoon = ["tsp", "teaspoon", "t", "teaspoons"]
-# tablespoon = ["tbs", "tbsp", "tablespoon", "T", "Tbsp", "tablespoons"]
-# ounce = ["oz", "fluid ounce", "fl oz", "ounce", "ounces", "oz."]
-# # cup = ["c", "cup", "cups"]
-# # pint = ["p", "pt", "fl pt", "pint", "pints", "pt."]
-# # quart = ["q", "qt", "fl", "qt.", "quart", "quarts"]
-# ml = ["milliliter", "millilitre", "cc", "mL",
-#       "milliliters", "millilitres", "mls"]
-# litre = ["liter", "litre", "L", "liters", "litres"]
+ml = ["milliliter", "millilitre", "cc", "mL",
+      "milliliters", "millilitres", "mls"]
+litre = ["liter", "litre", "L", "liters", "litres"]
 # decilitre = ["deciliter", "decilitre", "dL", "deciliters", "decilitres"]
-# pound = ["lb", "lbs", "#", "pound", "pounds", "lb.", "lbs."]
 grams = ["g", "gram", "gms", "grams", "gm"]
 kilograms = ["kg", "kilogram", "kilograms"]
-all_units = [grams, kilograms]
+all_units = [grams, kilograms, litre, ml]
 
 
 # String checking function
 def str_check(question, error):
     global convert_to_grams
+    global convert_to_litres
+    global convert_to_ml
+    global convert_to_kg
     convert_to_grams = False
+    convert_to_litres = False
+    convert_to_kg = False
+    convert_to_ml = False
     in_list = False
     valid = False
     while not valid:
@@ -53,7 +55,13 @@ def str_check(question, error):
                     in_list = True
             if in_list:
                 if response in kilograms:
+                    convert_to_kg = True
+                elif response in grams:
                     convert_to_grams = True
+                elif response in litre:
+                    convert_to_litres = True
+                elif response in ml:
+                    convert_to_ml = True
                 return response
             else:
                 print(error)
@@ -62,13 +70,12 @@ def str_check(question, error):
             print(error)
 
 
-product_name = []
-product_unit = []
-product_mass_volume = []
-product_price = []
-product_details = [[product_name], [product_unit], [product_mass_volume],
-                   [product_price]]
-
+# product_name = []
+# product_unit = []
+# product_mass_volume = []
+# product_price = []
+product_details = []
+big_list = []
 
 # Main Routine
 money = float(input("How much money would you like to spend? $"))
@@ -77,25 +84,53 @@ while money < 10:
                         "enter how much money you would like to spend: $"))
 
 while another_product.upper() != "YES":
+    product_details = []
     another_product = ""
-    product_name.append(input("Enter the product name: "))
-    product_unit.append(str_check("Enter the unit of measurement: ", "Error"))
+    product_details.append(input("Enter the product name: "))
+    product_details.append(str_check("Enter the unit of measurement: ",
+                                     "!!Enter a valid measurement (you cannot "
+                                     "compare mass to volume)!!"))
 
     if convert_to_grams:
-        product_mass_volume.append(num_check("Enter the product mass/volume: ",
-                                             "!!Please enter a number "
-                                             "above 0!!")*1000)
-    else:
-        product_mass_volume.append(num_check("Enter the product mass/volume: ",
-                                             "!!Please enter a number "
-                                             "above 0!!"))
+        product_details.append(num_check("Enter the product mass/volume: ",
+                                         "!!Please enter a number "
+                                         "above 0!!"))
+        if litre in all_units:
+            all_units.remove(litre)
+            all_units.remove(ml)
 
-    product_price.append(num_check("Enter the product price: $",
-                                   "!!Please enter a price above $0!!"))
+    elif convert_to_kg:
+        product_details.append(num_check("Enter the product mass/volume: ",
+                                         "!!Please enter a number "
+                                         "above 0!!")*1000)
+        if litre in all_units:
+            all_units.remove(litre)
+            all_units.remove(ml)
+
+    elif convert_to_litres:
+        product_details.append(num_check("Enter the product mass/volume: ",
+                                         "!!Please enter a number "
+                                         "above 0!!")*1000)
+        if grams in all_units:
+            all_units.remove(grams)
+            all_units.remove(kilograms)
+
+    elif convert_to_ml:
+        product_details.append(num_check("Enter the product mass/volume: ",
+                                         "!!Please enter a number "
+                                         "above 0!!"))
+        if grams in all_units:
+            all_units.remove(grams)
+            all_units.remove(kilograms)
+
+    product_details.append(num_check("Enter the product price: $",
+                                     "!!Please enter a price above $0!!"))
+
+    big_list.append(product_details)
 
     another_product = input("Would you like to compare the products yet? ")
     while another_product.upper() != "NO" and another_product.upper() != "YES":
         another_product = input("!!Enter either 'Yes' or 'No'!!\n"
                                 "Would you like to compare the products yet? ")
 
-print(product_details)
+print(big_list)
