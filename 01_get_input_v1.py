@@ -75,7 +75,7 @@ def str_check(question, error):
 # product_mass_volume = []
 # product_price = []
 product_details = []
-big_list = []
+all_product_details = []
 
 # Main Routine
 money = float(input("How much money would you like to spend? $"))
@@ -126,11 +126,11 @@ while another_product.upper() != "YES":
     product_details.append(num_check("Enter the product price: $",
                                      "!!Please enter a price above $0!!"))
 
-    big_list.append(product_details)
+    all_product_details.append(product_details)
 
     another_product = input("Would you like to compare the products yet? ")
     while another_product.upper() != "NO" and another_product.upper() != "YES":
         another_product = input("!!Enter either 'Yes' or 'No'!!\n"
                                 "Would you like to compare the products yet? ")
 
-print(big_list)
+print(all_product_details)
