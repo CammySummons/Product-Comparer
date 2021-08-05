@@ -1,4 +1,4 @@
-""" Component 2 - Calculate price per unit
+""" Component 2 - Calculate the average unit price (price/mass or volume)
 Created by Sammy Cummins
 Version 1
 30/07/2021
@@ -8,6 +8,7 @@ product_details = [['Potato', 'g', 200.0, 1.0],
                    ['Pig', 'kg', 30000.0, 350.0]]
 
 product_no = 0
+price_per_unit_list = []
 price_per_unit = []
 for item in product_details:
     mass = 0
@@ -22,5 +23,6 @@ for item in product_details:
 
     product_no += 1
     price_per_unit = price / mass
+    price_per_unit_list.append(price/mass)
     print("Product no.{} price per unit mass/volume: {}".format
           (product_no, price_per_unit))
