@@ -29,7 +29,6 @@ def num_check(question, error):
 ml = ["milliliter", "millilitre", "cc", "mL",
       "milliliters", "millilitres", "mls"]
 litre = ["liter", "litre", "L", "liters", "litres"]
-# decilitre = ["deciliter", "decilitre", "dL", "deciliters", "decilitres"]
 grams = ["g", "gram", "gms", "grams", "gm"]
 kilograms = ["kg", "kilogram", "kilograms"]
 all_units = [grams, kilograms, litre, ml]
@@ -70,10 +69,6 @@ def str_check(question, error):
             print(error)
 
 
-# product_name = []
-# product_unit = []
-# product_mass_volume = []
-# product_price = []
 product_details = []
 all_product_details = []
 
