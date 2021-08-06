@@ -27,6 +27,8 @@ for value in product_details:
 
 print("Cheapest Item:  {}\nMost Expensive Item: {}\n".format(cheapest, expensive))
 
+# Printing products and their information
+print("--Product Information--")
 count = 0
 item = []
 for item in product_details:
