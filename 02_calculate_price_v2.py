@@ -1,7 +1,8 @@
 """ Component 2 - Calculate the average unit price (price/mass or volume) and
-find the lowest price per unit mass/volume to be the recommended purchase
+find the lowest price per unit mass/volume which is also affordable
+to be the recommended purchase
 Created by Sammy Cummins
-Version 1
+Version 2
 30/07/2021
 """
 
@@ -31,9 +32,13 @@ for product_details in all_product_details:
 
     product_no += 1
 
-    price_per_unit = price / mass
-    product_details.append(price_per_unit)
-    price_per_unit_list.append(price/mass)
+    if price > money:
+        price = 0
+        mass = 0
+    else:
+        price_per_unit = price / mass
+        product_details.append(price_per_unit)
+        price_per_unit_list.append(price_per_unit)
     print("Product no.{} price per unit mass/volume: {}".format
           (product_no, price_per_unit))
 
