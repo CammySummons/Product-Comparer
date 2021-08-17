@@ -47,7 +47,8 @@ best_buy_price = price_per_unit_list[0]
 
 for product_details in all_product_details:
     if best_buy_price in product_details:
-        print("Recommended Purchase: {}".format(product_details[0]))
+        recommended_purchase = product_details[0]
+        print("Recommended Purchase: {}".format(recommended_purchase))
 
 
 

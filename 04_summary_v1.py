@@ -23,9 +23,9 @@ mass = 0
 price = 0
 
 # Triggering summary with expected input
-information_question = input("Enter XXX: ")
+information_question = input("Enter Yes: ")
 
-if information_question == "XXX":
+if information_question == "Yes":
     count = 0
     item = []
 
