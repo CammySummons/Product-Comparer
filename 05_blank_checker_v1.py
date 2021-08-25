@@ -9,7 +9,7 @@ Version 1
 def blank_checker(question, error):
     valid = False
     while not valid:
-        response = input(question)
+        response = input(question).strip()
         if response == "":
             print(error)
         else:

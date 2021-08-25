@@ -24,6 +24,7 @@ convert_to_ml = False
 # Zeroing variables
 mass = 0
 count = 0
+money = 0
 
 
 # Number checking function
@@ -63,7 +64,7 @@ def str_check(question, error):
     valid = False
     while not valid:
         try:
-            response = str(input(question))
+            response = str(input(question)).lower().strip()
             for unit_list in all_units:
                 if response in unit_list:
                     in_list = True
@@ -85,10 +86,11 @@ def str_check(question, error):
 
 
 # Main Routine
-money = float(input("How much money would you like to spend? $"))
 while money < 10:
-    money = float(input("!!You must have at least $10!!\nPlease "
-                        "enter how much money you would like to spend: $"))
+    money = num_check("How much money would you like to spend? $",
+                      "!!You must enter a number!!")
+    if money < 10:
+        print("!!You must have at least $10!!")
 
 # Component 1
 # Asking for details and doing error checking

@@ -66,7 +66,7 @@ def str_check(question, error):
 
     while not valid:
         try:
-            response = str(input(question))
+            response = str(input(question)).lower().strip()
             for unit_list in all_units:
                 if response in unit_list:
                     in_list = True
@@ -91,7 +91,7 @@ def str_check(question, error):
 def blank_checker(question, error):
     valid = False
     while not valid:
-        response = input(question)
+        response = input(question).strip()
         if response == "":
             print(error)
         else:
@@ -107,7 +107,7 @@ print("*******Welcome to the Product Comparer!******\n"
 # Asking for money on hand
 while money < 10:
     money = num_check("Please enter how much money you would like to spend: $",
-                      "!!You must enter a number and have at least $10!!\n")
+                      "!!You must enter a number!!\n")
     if money < 10:
         print("!!You must have at least $10!!\n")
 

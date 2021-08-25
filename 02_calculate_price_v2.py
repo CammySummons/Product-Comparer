@@ -8,8 +8,8 @@ Version 2
 
 # Sample data which is hard coded but won't be when everything is compiled
 all_product_details = [['Potato', 'g', 200.0, 1.0],
-                   ['Trampoline', 'kg', 100000.0, 300.0],
-                   ['Pig', 'kg', 30000.0, 350.0]]
+                       ['Trampoline', 'kg', 100000.0, 300.0],
+                       ['Pig', 'kg', 30000.0, 350.0]]
 
 product_no = 0
 price_per_unit_list = []
@@ -49,6 +49,3 @@ for product_details in all_product_details:
     if best_buy_price in product_details:
         recommended_purchase = product_details[0]
         print("Recommended Purchase: {}".format(recommended_purchase))
-
-
-
