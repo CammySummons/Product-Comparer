@@ -1,4 +1,5 @@
 """ Product Comparer - Full working program with added commenting
+and some bug fixes
 Created by Sammy Cummins
 Version 3
 17/08/2021
@@ -13,6 +14,7 @@ expensive = []
 item = []
 product_details = []
 all_product_details = []
+too_expensive_id_list = [""]
 
 # Setting variables
 global price
@@ -168,9 +170,11 @@ while another_product.upper() != "YES":
     all_product_details.append(product_details)
 
     another_product = input("Would you like to compare the products yet? ")
-    while another_product.upper() != "NO" and another_product.upper() != "YES":
+    while another_product.upper().strip() != "NO" and \
+            another_product.upper().strip() != "YES":
         another_product = input("!!Enter either 'Yes' or 'No'!!\n"
                                 "Would you like to compare the products yet? ")
+
 
 # Component 2
 # Extracting mass and price from all_product_details to get price_per_unit
@@ -186,6 +190,7 @@ for product in all_product_details:
         count += 1
 
     if price > money:
+        too_expensive_id_list.append(price)
         price = 0
         mass = 0
     else:
@@ -193,16 +198,29 @@ for product in all_product_details:
         product.append(price_per_unit)
         price_per_unit_list.append(price_per_unit)
 
-price_per_unit_list = sorted(price_per_unit_list)
-best_buy_price = price_per_unit_list[0]
-
-for product in all_product_details:
-    if best_buy_price in product:
-        recommended_purchase = product[0]
+if len(price_per_unit_list) > 0:
+    price_per_unit_list = sorted(price_per_unit_list)
+    best_buy_price = price_per_unit_list[0]
+    for product in all_product_details:
+        if best_buy_price in product:
+            recommended_purchase = product[0]
+else:
+    i = 0
+    low_i = 0
+    for product in all_product_details:
+        if i == 0:
+            lowest = product[3]/product[2]
+        if product[3]/product[2] < lowest:
+            lowest = product[3]/product[2]
+            low_i = i
+        i += 1
+    recommended_purchase = "You can't afford any of these items but the " \
+                           "best value item is {}"\
+        .format(all_product_details[low_i][0])
 
 
 # Component 3
-# Ranking from most expensive to least
+# Ranking from most expensive to least expensive
 for product in all_product_details:
     prices.append(product[3])
 
@@ -217,7 +235,7 @@ for product in all_product_details:
                 expensive = product[0]
 
 
-# Component 4
+# Component 4 - summary
 print("\n\n------Products Entered------\n")
 
 # Extracting details from all_product_details
@@ -231,9 +249,15 @@ for product in all_product_details:
         elif count == 3:
             print("Cost: $" + str("{:.2f}".format(detail)))
             price = detail
+
         count += 1
-        if count == 5:
-            count = 0
+        for ID in too_expensive_id_list:
+            if str(ID) == str(price):
+                if count == 4:
+                    count = 0
+            else:
+                if count == 5:
+                    count = 0
 
     price_per_unit = price / mass
     print("Average unit price: ${:.4f}\n".format(price_per_unit))

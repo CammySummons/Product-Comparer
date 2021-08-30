@@ -164,7 +164,8 @@ while another_product.upper() != "YES":
     another_product = input("Would you like to compare the products yet? ")
     while another_product.upper() != "NO" and another_product.upper() != "YES":
         another_product = input("!!Enter either 'Yes' or 'No'!!\n"
-                                "Would you like to compare the products yet? ")
+                                "Would you like to compare the products "
+                                "yet? ").strip()
 
 # Component 2
 # Extracting mass and price from all_product_details to get price_per_unit
