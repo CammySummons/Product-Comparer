@@ -16,6 +16,7 @@ kilograms = ["kg", "kilogram", "kilograms"]
 all_units = [grams, kilograms, litre, ml]
 
 
+# FUNCTIONS
 # Number checking function
 def num_check(question, error):
     valid = False
