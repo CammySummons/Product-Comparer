@@ -29,6 +29,7 @@ convert_to_ml = False
 mass = 0
 count = 0
 money = 0
+product_entries = 0
 
 
 # Abbreviation lists
@@ -108,8 +109,8 @@ def blank_checker(question, error):
 
 # Main Routine
 # Welcome + Information
-print("              *******Welcome to the Product Comparer!******\n")
-print("              -----------------Information-----------------"
+print("                ******Welcome to the Product Comparer!******\n")
+print("                ----------------Information----------------"
       "\nIf you are new to this program please feel free to read the following"
       " information.\nThe Product Comparer is a program that allows you to "
       "compare products to each other\n(e.g. a Small block of chocolate compar"
@@ -177,12 +178,16 @@ while another_product.upper() != "YES":
                                      "!!Please enter a price above $0!!\n"))
 
     all_product_details.append(product_details)
+    product_entries += 1
 
-    another_product = input("Would you like to compare the products yet? ")
-    while another_product.upper().strip() != "NO" and \
-            another_product.upper().strip() != "YES":
-        another_product = input("!!Enter either 'Yes' or 'No'!!\n"
-                                "Would you like to compare the products yet? ")
+    if product_entries > 1:
+        another_product = input("Would you like to compare the products yet? ")
+        while another_product.upper().strip() != "NO" and \
+                another_product.upper().strip() != "YES":
+            another_product = input("!!Enter either 'Yes' or 'No'!!\nWould you"
+                                    " like to compare the products yet? ")
+    else:
+        another_product = "NO"
 
 
 # Component 2
