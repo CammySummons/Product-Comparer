@@ -107,8 +107,8 @@ while loop != "NO":
     expensive = []  # Contains the most expensive item
     product_details = []
     all_product_details = []  # Contains all products and their details
-    too_expensive_id_list = [""]  # If an item's cost > the users money on hand,
-    # it will be added to this list
+    too_expensive_id_list = [""]  # If an item's cost > the users money on
+    # hand, it will be added to this list
 
     # Setting variables
     global price
@@ -127,8 +127,8 @@ while loop != "NO":
 
     # Asking for money on hand
     while money < 10:
-        money = num_check("Please enter how much money you would like to spend: $",
-                          "!!You must enter a number!!\n")
+        money = num_check("Please enter how much money you would like to "
+                          "spend: $", "!!You must enter a number!!\n")
         if money < 10:
             print("!!You must have at least $10!!\n")
 
@@ -139,11 +139,12 @@ while loop != "NO":
         another_product = ""
 
         product_details.append(blank_checker("\nEnter the product name: ",
-                                             "!!You cannot leave this blank!!\n"))
+                                             "!!You cannot leave this "
+                                             "blank!!\n"))
 
         product_details.append(str_check("Enter the unit of measurement: ",
-                                         "!!Enter a valid measurement (you cannot "
-                                         "compare mass to volume)!!\n"))
+                                         "!!Enter a valid measurement (you "
+                                         "cannot compare mass to volume)!!\n"))
 
         if convert_to_grams:
             product_details.append(num_check("Enter the product mass/volume: ",
@@ -178,17 +179,20 @@ while loop != "NO":
                 all_units.remove(kilograms)
 
         product_details.append(num_check("Enter the product price: $",
-                                         "!!Please enter a price above $0!!\n"))
+                                         "!!Please enter a price "
+                                         "above $0!!\n"))
 
         all_product_details.append(product_details)
         product_entries += 1
 
         if product_entries > 1:
-            another_product = input("Would you like to compare the products yet? ")
+            another_product = input("Would you like to compare the products "
+                                    "yet? ")
             while another_product.upper().strip() != "NO" and \
                     another_product.upper().strip() != "YES":
-                another_product = input("!!Enter either 'Yes' or 'No'!!\nWould you"
-                                        " like to compare the products yet? ")
+                another_product = input("!!Enter either 'Yes' or 'No'!!\n"
+                                        "Would you like to "
+                                        "compare the products yet? ")
         else:
             another_product = "NO"
 
@@ -289,4 +293,5 @@ while loop != "NO":
     while loop.upper().strip() != "NO" and \
             loop.upper().strip() != "YES":
         loop = input("!!Enter either 'Yes' or 'No'!!\nWould you like to use "
-                     "the program again? (Type 'Yes' to use again or 'No' to exit): ")
+                     "the program again? (Type 'Yes' to use again or 'No' to "
+                     "exit): ")
