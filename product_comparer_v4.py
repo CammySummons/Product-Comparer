@@ -260,23 +260,20 @@ while loop != "NO":
     # Extracting details from all_product_details
     count = 0
     for product in all_product_details:
-        for detail in product:
-            if count == 0:
-                print("Item name: " + str(detail))
-            elif count == 2:
-                mass = detail
-            elif count == 3:
-                print("Cost: $" + str("{:.2f}".format(detail)))
-                price = detail
+        price = product[3]
+        mass = product[2]
+        print("")
+        print("Product name: " + product[0])
+        print("Cost: ${:.2f}".format(price))
 
-            count += 1
-            for ID in too_expensive_id_list:
-                if str(ID) == str(price):
-                    if count == 4:
-                        count = 0
-                else:
-                    if count == 5:
-                        count = 0
+        count += 1
+        for ID in too_expensive_id_list:
+            if str(ID) == str(price):
+                if count == 4:
+                    count = 0
+            else:
+                if count == 5:
+                    count = 0
 
         price_per_unit = price / mass
         print("Average unit price: ${:.4f}\n".format(price_per_unit))

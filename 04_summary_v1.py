@@ -50,5 +50,5 @@ if information_question == "Yes":
 
     print("Cheapest Product: {}\nMost Expensive Product: {}\n".format
           (cheapest, expensive))
-    print("Recommended Product Purchase (Best value and affordable item: {}"
+    print("Recommended Product Purchase (Best value and affordable item): {}"
           .format(recommended_product))
