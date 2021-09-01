@@ -2,7 +2,8 @@
 find the lowest price per unit mass/volume which is also affordable
 to be the recommended purchase
 Created by Sammy Cummins
-Alternate version of version 2 that still reaches the same result
+Alternate version of version 2 that still reaches the same result (This has
+different formatting and shows the price/mass even when the price is > money
 31/08/2021
 """
 
@@ -13,11 +14,16 @@ all_product_details = [['Potato', 'g', 200.0, 1.0],
 
 price_per_unit_list = []
 price_per_unit = []
+space_len = 0
 
 money = float(input("How much money would you like to spend? $"))
 
 # Extracting mass and price from all_product_details to get price_per_unit
 for product in all_product_details:
+    # Gets the length of the largest named product
+    for products in all_product_details:
+        if len(products[0]) > space_len:
+            space_len = len(products[0])
 
     mass = product[2]
     price = product[3]
@@ -26,14 +32,16 @@ for product in all_product_details:
     # If the price of a product is more expensive than the amount you have, the
     # lower cost item overrides it, making the lower cost one more recommended
     if price > money:
-        price = 0
-        mass = 0
+        print("{} price per unit mass/volume:{} ${:.4f}".format
+              (name, (space_len - len(name)) * " ", price / mass))
+        price_per_unit = 0
     else:
         price_per_unit = price / mass
         product.append(price_per_unit)
         price_per_unit_list.append(price_per_unit)
-    print("{} price per unit mass/volume: {}".format
-          (name, price_per_unit))
+    if price_per_unit != 0:
+        print("{} price per unit mass/volume:{} ${:.4f}".format
+              (name, (space_len - len(name)) * " ", price_per_unit))
 
 price_per_unit_list = sorted(price_per_unit_list)
 best_buy_price = price_per_unit_list[0]

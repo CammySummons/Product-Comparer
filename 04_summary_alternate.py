@@ -41,7 +41,8 @@ if information_question == "Yes":
     for name in name_dict:
         print("Item name: " + product_dict["name"][name])
         print("Cost: $" + product_dict["price"][name])
-        price_per_unit = float(product_dict["price"][name]) / float(product_dict["mass"][name])
+        price_per_unit = float(product_dict["price"]
+                               [name]) / float(product_dict["mass"][name])
         print("Average unit price: ${:.4f}\n".format(price_per_unit))
 
     print("Cheapest Product: {}\nMost Expensive Product: {}\n".format
