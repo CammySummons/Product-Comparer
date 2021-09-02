@@ -1,7 +1,8 @@
-""" Product Comparer - Full working adding extra measurements
+""" Product Comparer - Full working program with changes made in relation to
+feedback given in usability (adding extra measurements etc.)
 Created by Sammy Cummins
-Version 4
-30/08/2021
+Version 5
+02/09/2021
 """
 
 loop = "Yes"  # Allows program to run
