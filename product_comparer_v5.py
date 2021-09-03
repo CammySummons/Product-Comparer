@@ -8,9 +8,12 @@ Version 5
 loop = "Yes"  # Allows program to run
 
 # Abbreviation lists
+# List layout: ["ways of entering unit" (e.g. "ml"), whether or not it is
+# measuring mass (e.g. False), conversion factor (e.g. 1000)]
 ml = ["milliliter", "millilitre", "cc", "ml",
       "milliliters", "millilitres", "mls", False, 1]
 litre = ["liter", "litre", "l", "liters", "litres", False, 1000]
+quart = ["qt", "quart", "quarts", False, 946.352946]
 grams = ["g", "gram", "gms", "grams", "gm", True, 1]
 kilograms = ["kg", "kilogram", "kilograms", True, 1000]
 ounce = ["ounce", "ounces", "oz", True, 28.34952]
@@ -32,11 +35,13 @@ def num_check(question, error):
             print(error)
 
 
+# Checks if unit is in unit_list and converts to ml or grams if necessary
 def conversion(question, error):
     valid = False
-    in_list = False
+    in_list = False  # Whether or not the unit input is in a unit list
     while not valid:
         try:
+            # Getting product unit
             response = str(input(question)).lower().strip()
             for unit in all_units:
                 for specific_unit in unit:
@@ -46,10 +51,13 @@ def conversion(question, error):
                         conversion_factor = unit[-1]
 
             if in_list:
+                # Getting product mass/volume
                 product_details.append(num_check(
                     "Enter the product mass/volume: ",
                     "!!Please enter a number "
                     "above 0!!\n")*conversion_factor)
+
+                # Making it so mass cannot be compared to volume
                 if unit_type_mass is True and litre in all_units:
                     all_units.remove(litre)
                     all_units.remove(ml)
@@ -103,7 +111,7 @@ while loop != "NO":
     price_per_unit = []
     prices = []
     all_units = [grams, kilograms, ounce,
-                 pounds, litre, ml]  # Contains all unit lists
+                 pounds, litre, ml, quart]  # Contains all unit lists
     cheapest = []  # Contains the least expensive item
     expensive = []  # Contains the most expensive item
     product_details = []
@@ -130,23 +138,27 @@ while loop != "NO":
             print("!!You must have at least $10!!\n")
 
     # Component 1
-    # Asking for details and doing error checking
+    # Asking for product details and doing error checking
     while another_product.upper() != "YES":
         product_details = []
         another_product = ""
 
+        # Getting product name
         product_details.append(blank_checker("\nEnter the product name: ",
                                              "!!You cannot leave this "
                                              "blank!!\n"))
 
+        # Getting product unit and mass/volume
         product_details.append(conversion("Enter the unit of measurement: ",
                                           "!!Enter a valid measurement (you c"
                                           "annot compare mass to volume)!!\n"))
 
+        # Getting product price
         product_details.append(num_check("Enter the product price: $",
                                          "!!Please enter a price "
                                          "above $0!!\n"))
 
+        # Adding the product information to list
         all_product_details.append(product_details)
         product_entries += 1
 
@@ -183,6 +195,7 @@ while loop != "NO":
             product.append(price_per_unit)
             price_per_unit_list.append(price_per_unit)
 
+    # Sorting price_per_unit_list to get the recommended purchase
     if len(price_per_unit_list) > 0:
         price_per_unit_list = sorted(price_per_unit_list)
         best_buy_price = price_per_unit_list[0]
@@ -257,7 +270,7 @@ while loop != "NO":
     # Component 4 - summary
     print("\n\n------Products Entered------\n")
 
-    # Extracting details from all_product_details
+    # Extracting details (price, mass etc.) from all_product_details
     count = 0
     for product in all_product_details:
         price = product[3]
